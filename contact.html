@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Redwood City</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #09111b;
+      --bg-2: #0d1724;
+      --panel: rgba(255, 255, 255, 0.06);
+      --text: #f5f7fb;
+      --muted: rgba(245, 247, 251, 0.75);
+      --gold: #f4b544;
+      --cyan: #5ed6ff;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(94,214,255,0.12), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(244,181,68,0.1), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 16px 0;
+      backdrop-filter: blur(10px);
+      background: rgba(9, 17, 27, 0.55);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(9, 17, 27, 0.75);
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .brand strong {
+      font-size: 0.96rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .button,
+    .button-light {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    .button-light:hover {
+      transform: translateY(-1px);
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--gold), #ff8b38);
+      color: #0a0f18;
+      box-shadow: 0 16px 30px rgba(244, 181, 68, 0.22);
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-light {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .hero {
+      padding: 34px 0 34px;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 420px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(5, 10, 18, 0.12) 0%, rgba(5, 10, 18, 0.88) 100%),
+        radial-gradient(circle at center, rgba(94,214,255,0.08), transparent 35%),
+        linear-gradient(160deg, #102033 0%, #0b1522 55%, #09111b 100%);
+      border: 1px solid var(--line);
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      padding: 72px 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--cyan);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: 0.92;
+      margin-bottom: 18px;
+      max-width: 620px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin-bottom: 24px;
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .hero-side {
+      position: relative;
+      padding: 26px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
+        radial-gradient(circle at 50% 30%, rgba(244,181,68,0.16), transparent 30%);
+    }
+
+    .hero-logo-card {
+      width: 100%;
+      max-width: 360px;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-logo-card img {
+      width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,0.28));
+    }
+
+    .hero-mini-stats {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-stat {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 8px 0 78px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 26px;
+    }
+
+    .panel h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .panel > p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-item {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-item h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-item p {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .contact-item a {
+      color: var(--cyan);
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      color: #fff;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(245, 247, 251, 0.45);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(94,214,255,0.12);
+    }
+
+    .field textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    .helper {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .footer-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 24px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-card,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 56px 28px 22px;
+      }
+
+      .hero-side {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-wrap {
+        position: static;
+      }
+
+      .nav {
+        border-radius: 20px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-mini-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .panel,
+      .footer-card {
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html#home">
+          <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo" />
+          <strong>REDWOOD CITY</strong>
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html#home">Home</a>
+          <a href="index.html#team">Team</a>
+          <a href="index.html#experience">Experience</a>
+          <a href="index.html#stats">Stats</a>
+          <a class="active" href="contact.html">Contact</a>
+        </div>
+
+        <a class="button" href="https://www.roblox.com/games/117819753882504/Redwood-City" target="_blank" rel="noopener noreferrer">Play Now</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">Get in touch</span>
+            <h1>Contact Redwood City</h1>
+            <p>
+              Reach the team for support, partnerships, community questions, or general enquiries. This page now matches the main site style instead of looking like a separate template.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="https://discord.gg/nc7RJXwnyQ" target="_blank" rel="noopener noreferrer">Join Discord</a>
+              <a class="button-light" href="mailto:rblxredwoodcity@gmail.com">Email Us</a>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-logo-card">
+              <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo" />
+              <div class="hero-mini-stats">
+                <div class="mini-stat">
+                  <strong>Fast</strong>
+                  <span>Direct contact</span>
+                </div>
+                <div class="mini-stat">
+                  <strong>Live</strong>
+                  <span>Formspree form</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="panel">
+            <h2>Contact links</h2>
+            <p>Use these direct links if you want the fastest way to reach the team.</p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <h3>Discord</h3>
+                <p>Join the community server for updates, support, announcements, and applications.</p>
+                <a href="https://discord.gg/nc7RJXwnyQ" target="_blank" rel="noopener noreferrer">discord.gg/nc7RJXwnyQ</a>
+              </div>
+
+              <div class="contact-item">
+                <h3>Email</h3>
+                <p>Use email for partnerships, private support, reports, or business enquiries.</p>
+                <a href="mailto:rblxredwoodcity@gmail.com">rblxredwoodcity@gmail.com</a>
+              </div>
+
+              <div class="contact-item">
+                <h3>Roblox game</h3>
+                <p>Send players directly to the official Redwood City game page.</p>
+                <a href="https://www.roblox.com/games/117819753882504/Redwood-City" target="_blank" rel="noopener noreferrer">Open Redwood City on Roblox</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Send a message</h2>
+            <p>Use the form below to send a message directly to the Redwood City team.</p>
+
+            <form class="form-grid" action="https://formspree.io/f/mnjogljo" method="POST">
+              <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Your email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              </div>
+
+              <div class="field">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="What is this about?" />
+              </div>
+
+              <div class="field">
+                <label for="message">Your message</label>
+                <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+              </div>
+
+              <input type="hidden" name="_next" value="https://xgaming855.github.io/redwood-city-site/contact.html?sent=1" />
+
+              <button class="button" type="submit">Send Message</button>
+            </form>
+
+            <p class="helper">This form uses Formspree, so messages can be sent from your static GitHub Pages site straight to your email workflow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card">
+        <span>© 2026 Redwood City</span>
+        <span>Contact page</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
