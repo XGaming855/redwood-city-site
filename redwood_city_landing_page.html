@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redwood City</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #08111f;
+      --panel: rgba(10, 20, 35, 0.72);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: rgba(245, 247, 251, 0.78);
+      --accent: #f05a00;
+      --accent-2: #29a8ff;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(3, 8, 16, 0.48), rgba(3, 8, 16, 0.82)),
+        radial-gradient(circle at top, rgba(240, 90, 0, 0.15), transparent 35%),
+        url('Redwood_City_Official_Logo.png') center 18% / 420px no-repeat,
+        linear-gradient(135deg, #0a1220 0%, #102844 45%, #08111f 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      width: min(1100px, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--panel-border);
+      background: rgba(8, 17, 31, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      padding: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a,
+    .cta,
+    .secondary-btn {
+      text-decoration: none;
+      color: var(--text);
+      transition: 0.2s ease;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #fff;
+    }
+
+    .cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #ff7a1a);
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(240, 90, 0, 0.3);
+    }
+
+    .cta:hover,
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto 0;
+      padding: 90px 24px 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      flex: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #a9d6ff;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .secondary-btn {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card,
+    .feature-card,
+    .showcase {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 28px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .showcase {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      background:
+        linear-gradient(180deg, rgba(8, 17, 31, 0.08) 0%, rgba(8, 17, 31, 0.9) 88%),
+        url('Redwood_City_Official_Logo.png') center 22% / 82% no-repeat,
+        linear-gradient(160deg, rgba(41,168,255,0.2), rgba(240,90,0,0.18));
+    }
+
+    .badge {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .showcase h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .showcase p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      max-width: 420px;
+    }
+
+    .feature-grid {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 60px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 24px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 28px;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.94rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        border-radius: 26px;
+        padding: 16px;
+      }
+
+      .nav-wrap {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        background:
+          linear-gradient(rgba(3, 8, 16, 0.56), rgba(3, 8, 16, 0.9)),
+          url('Redwood_City_Official_Logo.png') center 12% / 280px no-repeat,
+          linear-gradient(135deg, #0a1220 0%, #102844 45%, #08111f 100%);
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .stats,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .showcase {
+        min-height: 360px;
+        background:
+          linear-gradient(180deg, rgba(8, 17, 31, 0.08) 0%, rgba(8, 17, 31, 0.9) 88%),
+          url('Redwood_City_Official_Logo.png') center 24% / 78% no-repeat,
+          linear-gradient(160deg, rgba(41,168,255,0.2), rgba(240,90,0,0.18));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="nav-wrap">
+      <nav>
+        <div class="brand">
+          <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo" />
+          <span>REDWOOD CITY</span>
+        </div>
+
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <a class="cta" href="#features">Play Now</a>
+      </nav>
+    </div>
+
+    <main class="hero" id="home">
+      <section>
+        <span class="eyebrow">California roleplay experience</span>
+        <h1>Redwood City</h1>
+        <p>
+          A modern landing page concept using your Redwood City logo. This layout is built as a clean starter homepage with a floating navigation bar, bold hero text, glass-style cards, and space for your server info, trailers, or community updates.
+        </p>
+
+        <div class="button-row">
+          <a class="cta" href="#contact">Join Community</a>
+          <a class="secondary-btn" href="#about">Learn More</a>
+        </div>
+
+        <div class="stats" id="about">
+          <div class="stat-card">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Community uptime</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Custom features</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Custom branding</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="showcase" aria-label="Featured panel">
+        <div class="badge">Official Project</div>
+        <h2>Built around your logo</h2>
+        <p>
+          Swap the text, buttons, and sections for your own content. You can also replace the background with screenshots, a city image, or a video later.
+        </p>
+        <a class="secondary-btn" href="#features">See features</a>
+      </aside>
+    </main>
+
+    <section class="feature-grid" id="features">
+      <article class="feature-card">
+        <h3>Hero section</h3>
+        <p>Large title, logo-based background, and strong first impression for visitors landing on the site.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>Easy to edit</h3>
+        <p>Everything is in one HTML file, so you can quickly change text, buttons, colours, and section names.</p>
+      </article>
+
+      <article class="feature-card" id="contact">
+        <h3>Ready to expand</h3>
+        <p>Add Discord links, team sections, server rules, a gallery, or a trailer embed underneath this layout.</p>
+      </article>
+    </section>
+
+    <footer>
+      <span>© 2026 Redwood City. All rights reserved.</span>
+      <span>Landing page concept</span>
+    </footer>
+  </div>
+</body>
+</html>
