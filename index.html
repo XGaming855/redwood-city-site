@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redwood City</title>
+
+  <!-- Browser tab icon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
   <style>
     * {
       box-sizing: border-box;
@@ -15,7 +19,6 @@
       --bg: #09111b;
       --bg-2: #0d1724;
       --panel: rgba(255, 255, 255, 0.06);
-      --panel-strong: rgba(255, 255, 255, 0.1);
       --text: #f5f7fb;
       --muted: rgba(245, 247, 251, 0.75);
       --gold: #f4b544;
@@ -72,6 +75,7 @@
       border-radius: 18px;
       background: rgba(9, 17, 27, 0.75);
       box-shadow: var(--shadow);
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -246,7 +250,6 @@
       margin-bottom: 4px;
       color: #fff;
     }
-    
 
     .mini-stat span {
       color: var(--muted);
@@ -272,25 +275,13 @@
     }
 
     .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  align-items: stretch;
-}
-   .team-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(10px);
-  text-align: center;
-  padding: 22px 18px;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .team-card,
     .stat-card,
     .info-card {
       background: var(--panel);
@@ -303,6 +294,11 @@
     .team-card {
       text-align: center;
       padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
     }
 
     .avatar {
@@ -315,6 +311,13 @@
       display: grid;
       place-items: center;
       overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .avatar-fallback {
@@ -454,10 +457,6 @@
     }
 
     @media (max-width: 1080px) {
-      .team-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
       .cards-grid,
       .stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -491,7 +490,6 @@
     }
 
     @media (max-width: 640px) {
-      .team-grid,
       .cards-grid,
       .stats-grid,
       .hero-mini-stats {
@@ -520,7 +518,7 @@
     <div class="container">
       <nav class="nav">
         <a class="brand" href="#home">
-          <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo">
+          <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo" />
           <strong>REDWOOD CITY</strong>
         </a>
 
@@ -545,7 +543,8 @@
             <span class="eyebrow">Original Redwood City concept</span>
             <h1>A sharper look, without copying the other site.</h1>
             <p>
-              I changed the layout so it feels more unique: darker cinematic colours, split hero layout, glass panels, gold accents, and a more custom community-site feel instead of looking like the same template.
+              A darker cinematic homepage with a split hero layout, glass panels,
+              gold accents, and a custom community-site feel.
             </p>
             <div class="hero-actions">
               <a class="button" href="#experience">Explore</a>
@@ -555,7 +554,7 @@
 
           <div class="hero-side">
             <div class="hero-logo-card">
-              <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo">
+              <img src="Redwood_City_Official_Logo.png" alt="Redwood City logo" />
               <div class="hero-mini-stats">
                 <div class="mini-stat">
                   <strong>24/7</strong>
@@ -569,47 +568,57 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
     <section class="section" id="team">
       <div class="container">
         <h2 class="section-title">Core team</h2>
         <p class="section-text">
-          This section now uses darker cards and a more custom panel style so it feels less like the reference site. You can still swap the names, roles, and avatars later.
+          Add your real names, roles, and avatars here.
         </p>
 
-       <article class="team-card">
-  <div class="avatar">
-    <img src="dion.png" alt="Dion profile picture">
-  </div>
-  <h3>Dion</h3>
-  <div class="role">Developer</div>
-  <div class="handle">@dion</div>
-</article>
+        <div class="team-grid">
+          <article class="team-card">
+            <div class="avatar">
+              <img src="dion.png" alt="Dion profile picture" />
+            </div>
+            <h3>Dion</h3>
+            <div class="role">Developer</div>
+            <div class="handle">@dion</div>
+          </article>
 
           <article class="team-card">
-            <div class="avatar"><div class="avatar-fallback">S</div></div>
+            <div class="avatar">
+              <div class="avatar-fallback">S</div>
+            </div>
             <h3>Shawnyg</h3>
             <div class="role">Game Lead</div>
             <div class="handle">@shawnyg</div>
           </article>
 
           <article class="team-card">
-            <div class="avatar"><div class="avatar-fallback">C</div></div>
+            <div class="avatar">
+              <div class="avatar-fallback">C</div>
+            </div>
             <h3>Crywink</h3>
             <div class="role">Senior Developer</div>
             <div class="handle">@crywink</div>
           </article>
 
           <article class="team-card">
-            <div class="avatar"><div class="avatar-fallback">V</div></div>
+            <div class="avatar">
+              <div class="avatar-fallback">V</div>
+            </div>
             <h3>Vexqty</h3>
             <div class="role">Head of 3D Art</div>
             <div class="handle">@vexqty</div>
           </article>
 
           <article class="team-card">
-            <div class="avatar"><div class="avatar-fallback">M</div></div>
+            <div class="avatar">
+              <div class="avatar-fallback">M</div>
+            </div>
             <h3>MrFergie</h3>
             <div class="role">Creative Team</div>
             <div class="handle">@mrfergie</div>
@@ -622,12 +631,14 @@
       <div class="container">
         <div class="feature-banner">
           <div class="feature-media" aria-hidden="true">
-            <img src="Redwood_City_Official_Logo.png" alt="Redwood City feature graphic">
+            <img src="Redwood_City_Official_Logo.png" alt="Redwood City feature graphic" />
           </div>
           <div class="feature-copy">
             <h2>Built to feel distinct</h2>
             <p>
-              Instead of copying the same look too closely, this section uses a cleaner split-card layout with a darker theme, different accent colours, and more of a premium game-brand style.
+              Instead of copying the same look too closely, this layout uses a
+              darker theme, different accent colours, and a more premium
+              game-brand style.
             </p>
             <div>
               <a class="button-light" href="#stats">See the highlights</a>
@@ -641,7 +652,7 @@
       <div class="container">
         <h2 class="section-title">A layout with its own identity</h2>
         <p class="section-text">
-          These numbers are still placeholders, but the section styling has been changed so the site feels inspired by your reference instead of being too similar to it.
+          Replace these placeholders with your real numbers later.
         </p>
 
         <div class="stats-grid">
@@ -666,15 +677,15 @@
         <div class="cards-grid">
           <article class="info-card">
             <h3>Fast to edit</h3>
-            <p>Everything is still plain HTML, so you can upload it straight to GitHub Pages and change text whenever you want.</p>
+            <p>Everything is plain HTML, so you can update it quickly.</p>
           </article>
           <article class="info-card">
             <h3>Built from your branding</h3>
-            <p>Your Redwood City logo is already included so the page feels tied to your own project instead of a generic template.</p>
+            <p>Your Redwood City logo makes the page feel tied to your project.</p>
           </article>
           <article class="info-card">
             <h3>Ready for more pages</h3>
-            <p>You can add a full contact page, a gallery, a staff application page, or a Discord join page next.</p>
+            <p>Add a gallery, contact page, applications page, or Discord page next.</p>
           </article>
         </div>
       </div>
